@@ -1,0 +1,175 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --bg-clr: rgb(243, 243, 243);
+    --bx-shw: 0px 1px 5px rgb(221, 221, 221);
+    --bttm-brdr:1px solid rgb(241, 241, 241);
+}
+*{
+    font-family: "Inter Tight", serif;
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+button{
+    cursor: pointer;
+}
+body{
+    background-color: var(--bg-clr);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:24px 0;
+    height: 100vh;
+}
+.taskWrapper{
+    width: 400px;
+    min-height: 200px ;
+    background-color: white;
+    box-shadow: var(--bx-shw) ;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+}
+.top{
+    display: flex; 
+    justify-content: space-between; 
+    border-bottom: var(--bttm-brdr);
+    padding: 0 16px 8px 16px;
+}
+.btn{
+    display: flex; 
+    align-items: center; 
+    padding: 0 4px; 
+    background-color:var(--bg-clr); 
+    border-radius: 100%; 
+    border:none;
+}
+.lucideIcon{
+    width: 16px; 
+    color: black;
+}
+
+ul{
+    padding: 8px 16px 0 16px;
+}
+
+#msg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin: auto 0;
+    color: gray;
+    gap:8px;
+}
+
+ul li{
+    list-style: none;
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+    gap:8px;
+    padding: 4px 8px;
+    overflow: hidden;
+    height: fit-content;
+}
+ul li div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+}
+.todoTask{
+    width: 70%;
+    word-wrap: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+ul li div p:last-child{
+    margin-left: 2px;
+    color: gray ;
+    font-size: 12px;
+}
+
+input[type="checkbox"]{
+    margin-top:6px;
+    accent-color: rgb(2, 119, 2);
+    transform: scale(1.1);
+    outline: none;
+}
+.taskWrapper div .addToDoWrapper{
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #0000005b;
+    z-index: 20;
+}
+.taskWrapper div .addToDoWrapper .addToDoForm{
+    width: 300px;
+    min-height: 200px ;
+    background-color: white;
+    box-shadow:var(--bx-shw);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+}
+
+.addToDoWrapper .addToDoForm form{
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+}
+form input{
+    width: 100%;
+    border:none;
+    padding: 8px ;
+    border-radius: 4px;
+}
+
+form input[type="submit"]{
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+input[type="text"], input[type="time"] {
+    background: var(--bg-clr);
+    outline: 1px solid transparent;
+    border: 1px solid transparent;
+} 
+
+input[type="text"]:focus{
+    outline: 1px solid rgb(211, 211, 211);
+    border: 1px solid white;
+}
+
+.addToDoForm form .timeWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    box-shadow: none;
+}
+.addToDoForm form .timeWrapper div{
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+    gap:4px;
+   
+}
+
+.addToDoForm form .timeWrapper div label{
+    font-size: 14px;
+}
