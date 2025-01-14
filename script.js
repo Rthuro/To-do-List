@@ -11,10 +11,32 @@ const todoList = document.querySelector('#todo');
 const todoBtn = document.querySelector('#addToDo');
 const addToDoWrapper = document.querySelector('.addToDoWrapper');
 const taskWrapper =  document.querySelector('.taskWrapper');
-const timeErr =  document.getElementById('setTimeErr');
 const formBtn =  document.querySelector('.addToDoForm form #formBtn');
 const formTitle =  document.querySelector('.addToDoForm .top p');
+const setTimeBtn = document.getElementById('setTimeBtn');
+const chevron = document.querySelector('#setTimeBtn div');
+const timeWrapper = document.querySelector('.timeWrapper');
 
+function onTimeChange(timeInput) {
+    var timeSplit = timeInput.split(':'),
+      hours,
+      minutes,
+      meridian;
+    hours = timeSplit[0];
+    minutes = timeSplit[1];
+    if (hours > 12) {
+      meridian = 'pm';
+      hours -= 12;
+    } else if (hours < 12) {
+      meridian = 'am';
+      if (hours == 0) {
+        hours = 12;
+      }
+    } else {
+      meridian = 'pm';
+    }
+    return hours + ':' + minutes + ' ' + meridian;
+  }
 
 function checkList(){
     if( todoList.children.length > 0 ){
@@ -45,27 +67,18 @@ function resetInputs(){
     taskName.value = '';
     startTime.value = '';
     endTime.value = '';
-    timeErr.innerHTML = '';
+    taskName.style.outlineColor = "transparent";
 }
 
 function submitForm(value, id){
     form.onsubmit = (e)=>{
         e.preventDefault();
-        if(taskName.value == "" || startTime.value == "" || endTime.value == ""){
+        if(taskName.value == ""){
             
             if(taskName.value == ""){
                  taskName.style.outlineColor = "red";
             }
-    
-            if(startTime.value == ""){
-                err.push('set start time');
-            }
-    
-            if(endTime.value == ""){
-                err.push('set end time');
-            }
-            timeErr.innerHTML = err.toString();
-    
+
         } else {
             taskName.style.outlineColor = "transparent";
             if( value == 'Add task'){
@@ -77,7 +90,11 @@ function submitForm(value, id){
                         const editTaskName = todoListId[i].querySelector('.taskNameTime .todoTask');
                         const editTaskTime = todoListId[i].querySelector('.taskNameTime #taskTime');
                         editTaskName.innerHTML = taskName.value;
-                        editTaskTime.innerHTML = ` ${startTime.value} - ${endTime.value}`;
+
+                        if(!startTime.value == '' && !endTime.value == ''){
+                            editTaskTime.innerHTML = ` ${onTimeChange(startTime.value)} - ${onTimeChange(endTime.value)}`;
+                        }
+                       
                         break;
                     }
                 }
@@ -90,7 +107,7 @@ function submitForm(value, id){
     }
 }
 
-let listId = 0,  err = [];
+let listId = 0;
 function createTask(parent, name, start, end){
     const list = document.createElement('li');
     list.id = listId++;
@@ -108,7 +125,9 @@ function createTask(parent, name, start, end){
 
         const p2 = document.createElement('p');
         p2.id = 'taskTime';
-        p2.innerHTML = ` ${start} - ${end}`;
+        if(!start == '' && !end == ''){
+            p2.innerHTML = ` ${onTimeChange(start)} - ${onTimeChange(end)}`;
+        }
         div.appendChild(p2);
     list.appendChild(div);
 
@@ -173,6 +192,11 @@ taskName.addEventListener('change', ()=>{
     } else {
         taskName.style.outlineColor = "transparent";
     }
+});
+
+setTimeBtn.addEventListener('click', ()=>{
+    timeWrapper.style.display =  timeWrapper.style.display == 'flex'? 'none':'flex';
+    chevron.style.transform = chevron.style.transform == 'rotate(180deg)'? 'rotate(0deg)': 'rotate(180deg)';
 });
 
 
