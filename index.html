@@ -24,18 +24,25 @@
                     </div>
                     <form action="" >
                         <input type="text" name="task" id="taskName" placeholder="Name">
+                        <button type="button" id="setTimeBtn">
+                            Set time
+                            <div>   
+                            <i data-lucide="chevron-down" class="lucideIcon"></i>
+                            </div>
+                        </button>
                         <div class="timeWrapper">
+                            <p>Set both start time and end time.</p>
                             <div>
-                                <label for="startTime">Start time:</label>
-                                <input type="time" name="" id="startTime">
+                                <div>
+                                    <label for="startTime">Start time:</label>
+                                    <input type="time" name="" id="startTime">
+                                </div>
+                                <div>
+                                    <label for="endTime">End time:</label>
+                                    <input type="time" name="" id="endTime">
+                                </div>
                             </div>
-                            <div>
-                                <label for="endTime">End time:</label>
-                                <input type="time" name="" id="endTime">
-                            </div>
-                          
                         </div>
-                        <p id="setTimeErr"></p>
                         <input type="submit" value="Add Task" id="formBtn">
                     </form>
                 </div>
