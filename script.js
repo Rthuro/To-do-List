@@ -1,5 +1,5 @@
 
-lucide.createIcons();
+
 
 const formCloseBtn =  document.getElementById('closeBtn');
 const form = document.querySelector('form');
@@ -12,9 +12,9 @@ const todoBtn = document.querySelector('#addToDo');
 const addToDoWrapper = document.querySelector('.addToDoWrapper');
 const taskWrapper =  document.querySelector('.taskWrapper');
 const timeErr =  document.getElementById('setTimeErr');
+const formBtn =  document.querySelector('.addToDoForm form #formBtn');
+const formTitle =  document.querySelector('.addToDoForm .top p');
 
-// const options =  document.querySelector('.optionsCont .options');
-// const ellipsisBtn =  document.getElementById('ellipsisBtn');
 
 function checkList(){
     if( todoList.children.length > 0 ){
@@ -41,9 +41,59 @@ function checkList(){
     }
 }
 
-function createTask(parent, name, startTime, endTime){
-    const list = document.createElement('li');
+function resetInputs(){
+    taskName.value = '';
+    startTime.value = '';
+    endTime.value = '';
+    timeErr.innerHTML = '';
+}
 
+function submitForm(value, id){
+    form.onsubmit = (e)=>{
+        e.preventDefault();
+        if(taskName.value == "" || startTime.value == "" || endTime.value == ""){
+            
+            if(taskName.value == ""){
+                 taskName.style.outlineColor = "red";
+            }
+    
+            if(startTime.value == ""){
+                err.push('set start time');
+            }
+    
+            if(endTime.value == ""){
+                err.push('set end time');
+            }
+            timeErr.innerHTML = err.toString();
+    
+        } else {
+            taskName.style.outlineColor = "transparent";
+            if( value == 'Add task'){
+                 createTask(todoList, taskName.value, startTime.value, endTime.value);
+            } else if(value == 'Save changes'){
+                const todoListId = document.querySelectorAll('#todo li');
+                for(let i=0; i < todoListId.length; i++){
+                    if(todoListId[i].id == id){
+                        const editTaskName = todoListId[i].querySelector('.taskNameTime .todoTask');
+                        const editTaskTime = todoListId[i].querySelector('.taskNameTime #taskTime');
+                        editTaskName.innerHTML = taskName.value;
+                        editTaskTime.innerHTML = ` ${startTime.value} - ${endTime.value}`;
+                        break;
+                    }
+                }
+            }
+
+            addToDoWrapper.style.display = 'none';
+            checkList();
+            resetInputs();
+        }
+    }
+}
+
+let listId = 0,  err = [];
+function createTask(parent, name, start, end){
+    const list = document.createElement('li');
+    list.id = listId++;
     const input = document.createElement('input');
     input.setAttribute('type', 'checkbox');
     input.setAttribute('id', 'listcb');
@@ -57,48 +107,20 @@ function createTask(parent, name, startTime, endTime){
         div.appendChild(p);
 
         const p2 = document.createElement('p');
-        p2.innerHTML = ` ${startTime} - ${endTime}`;
+        p2.id = 'taskTime';
+        p2.innerHTML = ` ${start} - ${end}`;
         div.appendChild(p2);
     list.appendChild(div);
 
-    const optionCont = document.createElement('div');
-        optionCont.classList.add('optionsCont');
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('id', 'deleteBtn');
 
-        const button = document.createElement('button');
-        button.setAttribute('id', 'ellipsisBtn');
-        button.classList.add('btn');
-            const i = document.createElement('i');
-            i.setAttribute('data-lucide', 'ellipsis');
-            i.classList.add('lucideIcon');
-            button.appendChild(i);
-        optionCont.appendChild(button);
+    const i = document.createElement('i');
+        i.setAttribute('data-lucide', 'trash');
+        i.classList.add('lucideIcon');
+        deleteBtn.appendChild(i);
 
-        const options = document.createElement('div');
-        options.classList.add('options');
-
-        const button1 = document.createElement('button');
-            const edit = document.createElement('p');
-            edit.innerHTML = 'Edit';
-            const i1 = document.createElement('i');
-            i1.setAttribute('data-lucide', 'pencil-line');
-            i1.classList.add('lucideIcon');
-            button1.appendChild(edit);
-            button1.appendChild(i1);
-
-        const button2 = document.createElement('button');
-        const del = document.createElement('p');
-            del.innerHTML = 'Delete';
-        const i2 = document.createElement('i');
-            i2.setAttribute('data-lucide', 'trash');
-            i2.classList.add('lucideIcon');
-            button2.appendChild(del);
-            button2.appendChild(i2);
-
-        options.appendChild(button1);
-        options.appendChild(button2);
-        optionCont.appendChild(options);
-
-    list.appendChild(optionCont);
+    list.appendChild(deleteBtn);
 
 
     parent.appendChild(list);
@@ -116,46 +138,43 @@ function createTask(parent, name, startTime, endTime){
         }
     });
 
-    button.addEventListener('click', ()=>{
-        options.style.display == "flex"? options.style.display = 'none':options.style.display = 'flex';
-    });
-}
+    deleteBtn.addEventListener('click', ()=>{
+        deleteBtn.parentElement.remove();
+        checkList();
+       
+   });
 
-// ellipsisBtn.addEventListener('click', ()=>{
-//     options.style.display == 'flex' ? options.style.display = 'none':options.style.display = 'flex';
-// });
+    div.addEventListener('click', ()=>{
+        formTitle.innerHTML = 'Edit task';
+        addToDoWrapper.style.display = 'flex';
+        taskName.value = p.innerHTML;
+        startTime.value = start;
+        endTime.value = end;
+        formBtn.setAttribute('id', list.id);
+        submitForm(formBtn.value = 'Save changes', list.id);
+    });
+
+}
 
 formCloseBtn.onclick = ()=>{
     addToDoWrapper.style.display = 'none';
+    resetInputs();
 }
-
-form.onsubmit = (e)=>{
-    e.preventDefault();
-    if(taskName.value == "" || startTime.value == "" || endTime.value == ""){
-        let err = [];
-        if(taskName.value == ""){
-             taskName.style.outlineColor = "red";
-        }
-
-        if(startTime.value == ""){
-            err.push('set start time');
-        }
-
-        if(endTime.value == ""){
-            err.push('set end time');
-        }
-        timeErr.innerHTML = err.toString();
-
-    } else {
-        taskName.style.outlineColor = "transparent";
-        createTask(todoList, taskName.value, startTime.value, endTime.value);
-        addToDoWrapper.style.display = 'none';
-        checkList();
-    }
-   
-}
-checkList();
 
 todoBtn.addEventListener('click', ()=>{
+    formTitle.innerHTML = 'Add task';
     addToDoWrapper.style.display = 'flex';
+    submitForm(formBtn.value = 'Add task', 0);
 });
+
+taskName.addEventListener('change', ()=>{
+    if(taskName.value == ''){
+        taskName.style.outlineColor = "red";
+    } else {
+        taskName.style.outlineColor = "transparent";
+    }
+});
+
+
+checkList();
+
