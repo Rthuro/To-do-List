@@ -67,36 +67,6 @@ ul{
     color: gray;
     gap:8px;
 }
-.optionsCont{
-    position: relative;
-}
-.optionsCont .options{
-    box-shadow: var(--bx-shw);
-    padding: 4px;
-    width: 100px;
-    border-radius: 4px;
-    display:none;
-    flex-direction: column;
-    position: absolute;
-    right: 0;
-    z-index: 20;
-    background-color: white;
-}
- .optionsCont .options button{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap:4px;
-    padding: 2px 8px ;
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    border-radius: 2px;
-}
-.optionsCont .options button:hover{
-    background-color: var(--bg-clr);
-}
-
 
 ul li{
     list-style: none;
@@ -109,7 +79,7 @@ ul li{
 }
 ul li .taskNameTime{
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
     width: 85%;
 }
@@ -120,13 +90,17 @@ ul li .taskNameTime{
     white-space: normal;
 }
 ul li .taskNameTime p:last-child{
-    margin-left: 2px;
+    margin-top: 4px;
     color: gray ;
     font-size: 12px;
 }
-ul li #ellipsisBtn{
-    position: relative;
+ul li #deleteBtn{
+    display: flex;
     background-color: transparent;
+    border:none;
+}
+ul li #deleteBtn .lucideIcon{
+    color: rgb(204, 0, 0);
 }
 input[type="checkbox"]{
     margin-top:4px;
@@ -200,6 +174,9 @@ input[type="text"]:focus{
     width: 49%;
     gap:4px;
    
+}
+.addToDoForm form .timeWrapper input{
+    width: 100%;
 }
 
 .addToDoForm form .timeWrapper div label{
