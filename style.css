@@ -26,7 +26,7 @@ body{
 }
 .taskWrapper{
     width: 400px;
-    min-height: 200px ;
+    min-height: 250px ;
     background-color: white;
     box-shadow: var(--bx-shw) ;
     border-radius: 12px;
@@ -77,22 +77,28 @@ ul li{
     padding: 4px 8px;
     height: fit-content;
 }
+
 ul li .taskNameTime{
     display: flex;
     align-items: start;
     justify-content: space-between;
     width: 85%;
+    cursor: pointer;
 }
 .todoTask{
     width: 70%;
     word-wrap: normal;
     overflow-wrap: break-word;
     white-space: normal;
+    user-select: none;
 }
 ul li .taskNameTime p:last-child{
     margin-top: 4px;
     color: gray ;
     font-size: 12px;
+    text-align: end;
+    width: 25%;
+    user-select: none;
 }
 ul li #deleteBtn{
     display: flex;
@@ -138,6 +144,15 @@ input[type="checkbox"]{
     flex-direction: column;
     gap:12px;
 }
+form button{
+    display: flex;
+    align-items: center;
+    gap:4px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
 form input{
     width: 100%;
     border:none;
@@ -149,6 +164,7 @@ form input[type="submit"]{
     cursor: pointer;
     background-color: black;
     color: white;
+    margin-top: 8px;
 }
 input[type="text"], input[type="time"] {
     background: var(--bg-clr);
@@ -161,25 +177,51 @@ input[type="text"]:focus{
     border: 1px solid white;
 }
 
-.addToDoForm form .timeWrapper{
+.addToDoForm form button div{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+}
+.addToDoForm form .timeWrapper{
+    display: none;
+    flex-direction: column;
+    gap: 8px;
     padding: 0;
     box-shadow: none;
+    z-index: 5;
+    animation: opacity 300ms linear;
+}
+@keyframes opacity{
+    0%{
+        opacity: 0%;
+    }
+    50%{
+        opacity: 50%;
+    }
+    100%{
+        opacity: 100%;
+    }
+}
+.addToDoForm form .timeWrapper p{
+    font-size: 14px;
+    color: gray ;
 }
 .addToDoForm form .timeWrapper div{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.addToDoForm form .timeWrapper div div{
+    display: flex;
+    align-items: start;
     flex-direction: column;
     width: 49%;
     gap:4px;
    
 }
-.addToDoForm form .timeWrapper input{
+.addToDoForm form .timeWrapper div div input{
     width: 100%;
 }
 
-.addToDoForm form .timeWrapper div label{
+.addToDoForm form .timeWrapper div div label{
     font-size: 14px;
 }
 
