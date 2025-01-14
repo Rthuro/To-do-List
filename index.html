@@ -35,6 +35,7 @@
                             </div>
                           
                         </div>
+                        <p id="setTimeErr"></p>
                         <input type="submit" value="Add Task">
                     </form>
                 </div>
@@ -42,106 +43,35 @@
             
         </div>
         <ul id="todo" >
+            <!-- <li>
+                <input type="checkbox" name="" id="listcb">
+                <div class="taskNameTime">
+                    <p class="todoTask">asasa</p>
+                    <p>
+                        sas
+                    </p>
+                </div>
+                <div class="optionsCont">
+                    <button id="ellipsisBtn" class="btn">
+                        <i data-lucide="ellipsis" class="lucideIcon"></i>
+                    </button>
+                    <div class="options">
+                        <button>
+                            <p>Edit</p>
+                            <i data-lucide = 'pencil-line' class="lucideIcon"></i>
+                        </button>
+                        <button>
+                            <p>Delete</p>
+                            <i data-lucide = 'trash' class="lucideIcon"></i>
+                        </button>
+                 </div>
+                </div>
+                
+            </li> -->
            
         </ul>
     </div>
-  <script>
-    lucide.createIcons();
-    
-    const formCloseBtn =  document.getElementById('closeBtn');
-    const form = document.querySelector('form');
-    const taskName = document.querySelector('form #taskName');
-    const startTime = document.querySelector('form #startTime');
-    const endTime = document.querySelector('form #endTime');
-    const todoList = document.querySelector('#todo');
-
-    const todoBtn = document.querySelector('#addToDo');
-    const addToDoWrapper = document.querySelector('.addToDoWrapper');
-    const taskWrapper =  document.querySelector('.taskWrapper');
-
-    function checkList(){
-        if(todoList.children.length <=0 ){
-            const div = document.createElement('div');
-            div.setAttribute('id', 'msg');
-
-            const i = document.createElement('i');
-            i.setAttribute('data-lucide', 'list-todo');
-            div.appendChild(i);
-
-            const p = document.createElement('p');
-            p.innerHTML = "Currently no tasks to do.";
-            div.appendChild(p);
-
-            taskWrapper.appendChild(div);
-            lucide.createIcons();
-        } else {
-            const msg = document.getElementById('msg');
-            if (msg) {
-                taskWrapper.removeChild(msg);
-            }
-            lucide.createIcons();
-        }
-    }
-    
-    function createTask(parent, name, startTime, endTime){
-        const list = document.createElement('li');
-
-        const input = document.createElement('input');
-        input.setAttribute('type', 'checkbox');
-        input.setAttribute('id', 'listcb');
-        list.appendChild(input);
-
-        const div = document.createElement('div');
-            const p = document.createElement('p');
-            p.classList.add('todoTask');
-            p.innerHTML = name;
-            div.appendChild(p);
-
-            const p2 = document.createElement('p');
-            p2.innerHTML = ` ${startTime} - ${endTime}`;
-            div.appendChild(p2);
-        list.appendChild(div);
-
-        const button = document.createElement('button');
-        button.classList.add('btn');
-            const i = document.createElement('i');
-            i.setAttribute('data-lucide', 'ellipsis');
-            i.classList.add('lucideIcon');
-        list.appendChild(i);
-
-        parent.appendChild(list);
-
-        input.addEventListener('change', ()=>{
-            if(p.style.textDecoration == "line-through"){
-                p.style.textDecoration = 'none';
-                p.style.color = 'black';
-                p2.style.color = "gray";
-
-            } else {
-                p.style.textDecoration = "line-through";
-                p.style.color = "rgb(172, 172, 172)";
-                p2.style.color = "rgb(172, 172, 172)";
-            }
-        });
-    }
-
    
-    formCloseBtn.onclick = ()=>{
-        addToDoWrapper.style.display = 'none';
-    }
-
-    form.onsubmit = ()=>{
-        event.preventDefault();
-        createTask(todoList, taskName.value, startTime.value, endTime.value);
-        addToDoWrapper.style.display = 'none';
-        checkList();
-    }
-    checkList();
-
-    todoBtn.addEventListener('click', ()=>{
-        addToDoWrapper.style.display = 'flex';
-    });
-   
-  </script>
 </body>
+<script src="script.js"></script>
 </html>

@@ -67,6 +67,36 @@ ul{
     color: gray;
     gap:8px;
 }
+.optionsCont{
+    position: relative;
+}
+.optionsCont .options{
+    box-shadow: var(--bx-shw);
+    padding: 4px;
+    width: 100px;
+    border-radius: 4px;
+    display:none;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    z-index: 20;
+    background-color: white;
+}
+ .optionsCont .options button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:4px;
+    padding: 2px 8px ;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    border-radius: 2px;
+}
+.optionsCont .options button:hover{
+    background-color: var(--bg-clr);
+}
+
 
 ul li{
     list-style: none;
@@ -75,10 +105,9 @@ ul li{
     justify-content: space-around;
     gap:8px;
     padding: 4px 8px;
-    overflow: hidden;
     height: fit-content;
 }
-ul li div{
+ul li .taskNameTime{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -90,12 +119,15 @@ ul li div{
     overflow-wrap: break-word;
     white-space: normal;
 }
-ul li div p:last-child{
+ul li .taskNameTime p:last-child{
     margin-left: 2px;
     color: gray ;
     font-size: 12px;
 }
-
+ul li #ellipsisBtn{
+    position: relative;
+    background-color: transparent;
+}
 input[type="checkbox"]{
     margin-top:6px;
     accent-color: rgb(2, 119, 2);
@@ -113,7 +145,7 @@ input[type="checkbox"]{
     bottom: 0;
     right: 0;
     background: #0000005b;
-    z-index: 20;
+    z-index: 60;
 }
 .taskWrapper div .addToDoWrapper .addToDoForm{
     width: 300px;
@@ -123,11 +155,11 @@ input[type="checkbox"]{
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    padding: 16px 0;
+    padding-top: 16px ;
 }
 
 .addToDoWrapper .addToDoForm form{
-    padding: 8px 16px;
+    padding:24px 16px;
     display: flex;
     flex-direction: column;
     gap:12px;
@@ -173,3 +205,10 @@ input[type="text"]:focus{
 .addToDoForm form .timeWrapper div label{
     font-size: 14px;
 }
+
+.addToDoForm form #setTimeErr{
+    color: red;
+    font-size: 12px;
+    margin-top: -4px;
+}
+
