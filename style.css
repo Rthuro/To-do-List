@@ -129,7 +129,7 @@ ul li #ellipsisBtn{
     background-color: transparent;
 }
 input[type="checkbox"]{
-    margin-top:6px;
+    margin-top:4px;
     accent-color: rgb(2, 119, 2);
     transform: scale(1.1);
     outline: none;
