@@ -75,9 +75,7 @@ function submitForm(value, id){
         e.preventDefault();
         if(taskName.value == ""){
             
-            if(taskName.value == ""){
-                 taskName.style.outlineColor = "red";
-            }
+          taskName.style.outlineColor = "red";
 
         } else {
             taskName.style.outlineColor = "transparent";
